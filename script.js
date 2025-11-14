@@ -3,7 +3,7 @@ new Typed("#typed", {
   strings: [
     "Software Engineer",
     " Full Stack Web Developer",
-    "Python and Django Learner",
+    "Python and Django Developer",
   
   ],
   typeSpeed: 70,
@@ -19,5 +19,6 @@ AOS.init({
   once: true,
   offset: 80
 });
+
 
 

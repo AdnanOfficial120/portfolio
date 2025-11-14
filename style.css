@@ -48,7 +48,7 @@ body{
 }
 
 /* Sections */
-.section-pad{ padding: 90px 0; }
+.section-pad{ padding: 50px 0; }
 .bg-soft{ background: rgba(0,0,0,0.25); }
 
 /* Glassy Navbar */
@@ -147,20 +147,6 @@ body{
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
 }
 
-
-/* Hover stylish effect */
-/* .navbar-nav .nav-link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #ff6ec7, #6a5af9, #00e1ff);
-  transition: all 0.5s ease;
-  z-index: -1;
-} */
-
 .navbar-nav .nav-link:hover::before {
   left: 0;
 }
@@ -227,6 +213,52 @@ body{
   width: 100%;
 }
 
+
+
+/* Mobile Fix for Navbar Link Underline */
+@media (max-width: 992px) {
+
+  /* Remove animated underline */
+  .navbar-nav .nav-link::after {
+    display: none;
+  }
+
+  /* Make links pad nicely and be round on mobile */
+  .navbar-nav .nav-link {
+    transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+    border-radius: 10px;
+    padding: 10px 16px;
+    -webkit-tap-highlight-color: transparent; /* remove blue tap highlight on mobile */
+    outline: none;
+    /* ensure we have a solid background-color fallback (not gradient) */
+    background-color: transparent;
+  }
+
+  /* Soft glow on tap or hover (use background-color so transition works) */
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link:active,
+  .navbar-nav .nav-link.touch-active { /* touch-active for JS fallback if needed */
+    background-color: rgba(0, 225, 255, 0.12);
+    color: #00e1ff !important;
+    box-shadow: 0 0 10px rgba(0, 225, 255, 0.28);
+    transform: translateY(-2px);
+  }
+
+  /* Active link stays slightly highlighted (solid color so it's consistent) */
+  .navbar-nav .nav-link.active {
+    background-color: rgba(255, 110, 199, 0.16);
+    color: #ff6ec7 !important;
+    box-shadow: 0 0 12px rgba(255, 110, 199, 0.28);
+    font-weight: 700;
+    transform: none;
+  }
+}
+
+
+
+
+/* now adding fo r 3 lines */
+
 /* Hero */
 /* Hero Section */
 
@@ -281,15 +313,7 @@ body{
   animation: glowPulse 2.5s infinite alternate;
 }
 
-/* ✨ Star Sparkle Around "Hi" */
-/* .hero-title::before,
-.hero-title::after {
-  content: "✦";
-  position: absolute;
-  font-size: 1.2rem;
-  color: #fff;
-  animation: sparkle 3s infinite ease-in-out;
-} */
+
 
 .hero-title::before {
   top: -10px;
@@ -518,6 +542,7 @@ body{
 
 /* Image Card */
 
+
 .about-card {
   position: relative;
   overflow: hidden;
@@ -541,6 +566,38 @@ body{
   opacity: 0;
   transition: opacity 0.6s ease;
   border-radius: 20px;
+}
+/* 
+   ABOUT SECTION SPACING
+*/
+
+/* Paragraph text spacing */
+#about p {
+  line-height: 1.7; /* more readable line height */
+  margin-bottom: 2rem; /* space after paragraph */
+  color: rgba(255,255,255,0.9);
+}
+
+/* Skill subtitles spacing */
+#about h4 {
+  margin-top: 2.5rem; /* more space before subtitle */
+  margin-bottom: 1.5rem; /* space after subtitle */
+}
+
+/* Skill chips spacing */
+#about .chip {
+  margin-bottom: 10px; /* vertical spacing between rows */
+}
+
+/* Adjust gap for flex-wrap container */
+#about .d-flex.flex-wrap.gap-2 {
+  row-gap: 12px; 
+  column-gap: 12px; 
+}
+
+/* Optional: add spacing between Technical Skills and Professional Skills sections */
+#about h4 + .d-flex {
+  margin-bottom: 2rem; /* extra space after each skills block */
 }
 
 /* Text reveal */
@@ -649,8 +706,9 @@ h4 {
   box-shadow: 0 6px 14px rgba(0, 255, 157, 0.35);
 }
 
+/* project s sectionnnn */
 
-/* Premium Project Card */
+/*  Project Card */
 .project-card {
   position: relative;
   border-radius: 18px;
@@ -661,59 +719,95 @@ h4 {
   cursor: pointer;
 }
 
+/* Hover: Glow + Scale + Gradient Border */
 .project-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.55);
-  border: 1px solid transparent;
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0, 245, 255, 0.4), 0 0 20px rgba(255, 0, 200, 0.3);
+  border: 2px solid transparent;
   background-image: linear-gradient(#111,#111), 
-    linear-gradient(135deg, #00f5ff, #ff00c8);
+                    linear-gradient(135deg, #00f5ff, #ff00c8, #ffea00);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
 
-/* Image with subtle tilt */
+/* ---------------------- Image ---------------------- */
 .pc-media img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s ease;
-}
-.project-card:hover .pc-media img {
-  transform: scale(1.08) rotate3d(1,1,0,6deg);
+  transition: transform 0.6s ease, filter 0.6s ease;
 }
 
-/* Body content */
+/* Hover: Parallax + Brightness */
+.project-card:hover .pc-media img {
+  transform: scale(1.1) rotate3d(1,1,0,8deg);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* ---------------------- Body Content ---------------------- */
 .pc-body {
   padding: 18px;
   text-align: left;
 }
+
+/* Title with Gradient Underline */
 .pc-title {
   margin: 0 0 6px;
   font-weight: 700;
+  position: relative;
+  display: inline-block;
   transition: color 0.4s ease, text-shadow 0.4s ease;
 }
+
+/* Hover: Neon Title Glow */
 .project-card:hover .pc-title {
-  color: #fff;
-  text-shadow: 0 0 12px rgba(255,255,255,0.6);
+  color: #00f5ff;
+  text-shadow: 0 0 8px #00f5ff, 0 0 16px #ff00c8;
 }
+
+/* Animated Gradient Underline */
+.pc-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #00f5ff, #ff00c8, #ffea00);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.project-card:hover .pc-title::after {
+  width: 100%;
+}
+
+/* Text */
 .pc-text {
   color: rgba(255,255,255,0.6);
   margin-bottom: 12px;
   transition: color 0.4s ease;
 }
+
+/* Hover: Slight Text Brighten */
 .project-card:hover .pc-text {
   color: rgba(255,255,255,0.8);
 }
 
-/* Buttons */
+/* ---------------------- Buttons ---------------------- */
 .btn-cta, .btn-cta-outline {
-  transition: all .3s ease;
-}
-.btn-cta:hover, .btn-cta-outline:hover {
-  transform: scale(1.07);
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #00f5ff, #ff00c8);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,245,255,0.25), 0 0 6px #ff00c8;
+  border: none;
 }
 
+.btn-cta:hover, .btn-cta-outline:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0,245,255,0.45), 0 0 12px #ff00c8, 0 0 20px #ffea00;
+}
 /* Contact */
 .contact-btns a {
   display: flex;
@@ -792,6 +886,245 @@ h4 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+/* ----------------------
+   Contact Buttons
+----------------------- */
+/* ----------------------
+   Contact Buttons
+----------------------- */
+.contact-btns a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 26px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  min-width: 160px;
+  transition: all 0.35s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient glow overlay on idle */
+.contact-btns a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(120deg, rgba(0,198,255,0.2), rgba(255,0,200,0.2), rgba(0,255,157,0.2));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.contact-btns a:hover::before {
+  opacity: 1;
+}
+
+/* Bring content above overlay */
+.contact-btns a * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover: lift, scale, glow */
+.contact-btns a:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(0,198,255,0.35), 0 0 12px rgba(255,0,200,0.3), 0 0 20px rgba(0,255,157,0.25);
+}
+
+/* Icon styling + hover animation */
+.contact-btn i {
+  font-size: 28px;
+  margin-bottom: 6px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-btn:hover i {
+  transform: rotate(-10deg) scale(1.3);
+}
+
+/* Subtext below icon */
+.btn-subtext {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-btn:hover .btn-subtext {
+  transform: translateY(-2px);
+  color: #00fff5;
+  opacity: 1;
+}
+
+/* Brand hover colors */
+.contact-btn.wa:hover { color: #25d366; }
+.contact-btn.li:hover { color: #0a66c2; }
+.contact-btn.gm:hover { color: #ea4335; }
+
+/* Responsive */
+@media (max-width: 576px) {
+  .contact-btns {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-btns a {
+    width: 100%;
+  }
+}
+
+/* Premium underline text below buttons */
+/* ----------------------
+   Contact Buttons
+----------------------- */
+.contact-btns a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 26px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  min-width: 160px;
+  transition: all 0.35s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient overlay */
+.contact-btns a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(120deg, rgba(0,198,255,0.2), rgba(255,0,200,0.2), rgba(0,255,157,0.2));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.contact-btns a:hover::before {
+  opacity: 1;
+}
+
+/* Bring content above overlay */
+.contact-btns a * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover lift + glow */
+.contact-btns a:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(0,198,255,0.35), 0 0 12px rgba(255,0,200,0.3), 0 0 20px rgba(0,255,157,0.25);
+}
+
+/* Icon styling + hover animation */
+.contact-btn i {
+  font-size: 28px;
+  margin-bottom: 6px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-btn:hover i {
+  transform: rotate(-10deg) scale(1.3);
+}
+
+/* Subtext below icon */
+.btn-subtext {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contact-btn:hover .btn-subtext {
+  transform: translateY(-2px);
+  color: #00fff5;
+}
+
+/* Brand hover colors */
+.contact-btn.wa:hover { color: #25d366; }
+.contact-btn.li:hover { color: #0a66c2; }
+.contact-btn.gm:hover { color: #ea4335; }
+
+/* Responsive */
+@media (max-width: 576px) {
+  .contact-btns {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-btns a {
+    width: 100%;
+  }
+}
+
+/* Premium gradient text below buttons */
+.contact-subtext {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 1rem;
+  font-weight: 500;
+
+  /* Gradient background for text (WebKit only) */
+  background: linear-gradient(90deg, #00f5ff, #ff00c8, #ffea00);
+  -webkit-background-clip: text;       /* WebKit browsers */
+  -webkit-text-fill-color: transparent; /* WebKit browsers */
+
+  /* Standard property (fallback) */
+  background-clip: text; /* standard property (ignored in non-supporting browsers) */
+  color: #00f5ff;        /* fallback text color for other browsers */
+
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+
+
+
+/* Fade and slide up keyframes */
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: section background glow */
+#contact {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0,198,255,0.08), transparent 70%), radial-gradient(circle at bottom right, rgba(255,0,200,0.08), transparent 70%);
+  z-index: -1;
 }
 
 /* Footer */
