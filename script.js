@@ -3,7 +3,7 @@ new Typed("#typed", {
   strings: [
     "Software Engineer",
     " Full Stack Web Developer",
-    "Python and Django Developer",
+    "Python/Django Developer",
   
   ],
   typeSpeed: 70,
